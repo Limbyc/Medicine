@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.valance.medicine"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.valance.medicine"
@@ -27,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -44,4 +44,16 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //supabase
+    implementation ("io.github.jan-tennert.supabase:bom:2.2.1")
+    implementation ("io.github.jan-tennert.supabase:storage-kt:2.2.1")
+    implementation ("io.github.jan-tennert.supabase:gotrue-kt:2.2.1")
+    implementation ("io.ktor:ktor-client-core:2.3.9")
+    implementation ("io.ktor:ktor-client-json:1.6.2")
+    implementation ("io.ktor:ktor-client-serialization:1.6.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation ("io.ktor:ktor-client-okhttp:2.0.0")
+
 }
