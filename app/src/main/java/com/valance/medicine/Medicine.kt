@@ -12,12 +12,14 @@ class Medicine : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         supabaseClient = createSupabaseClient(
             supabaseUrl = "https://wtkjpgtyroorokhhkzeg.supabase.co",
             supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0a2pwZ3R5cm9vcm9raGhremVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAyNDgyNDEsImV4cCI6MjAyNTgyNDI0MX0.l9kuBsXy2TEHU3PeBDD9i7n3rUYsV1eZ0AN3tPdkfBk"
         ) {
-            install(Postgrest)
+            install(Postgrest){
+                defaultSchema = "public" // default: "public"
+                propertyConversionMethod = PropertyConversionMethod.SERIAL_NAME
+            }
         }
     }
 }

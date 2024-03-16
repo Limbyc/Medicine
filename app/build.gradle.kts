@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.5.30"
+
 }
 
 android {
@@ -58,7 +60,11 @@ dependencies {
     implementation ("io.ktor:ktor-client-json:1.6.2")
     implementation ("io.ktor:ktor-client-serialization:1.6.2")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt: 2.2.1")
     implementation ("io.ktor:ktor-client-okhttp:2.0.0")
+
+    //serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
 
 }

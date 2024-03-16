@@ -1,6 +1,7 @@
 package com.valance.medicine
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,15 +37,9 @@ class MainFragment: Fragment() {
 
     private fun launchQuery() {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val response = supabaseClient
-                .from("notes")
-                .select()
-                .body()
-
-            if (response != null) {
-                displayNotes(response)
-            } else {
-            }
+            val notes = supabaseClient.from("notes").select().decodeList<Notes>()
+            Log.d("",notes.toString())
+            displayNotes(notes)
         }
     }
 
