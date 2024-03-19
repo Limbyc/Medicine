@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.valance.medicine.databinding.MainFragmentBinding
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -39,7 +40,9 @@ class MainFragment: Fragment() {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             val notes = supabaseClient.from("notes").select().decodeList<Notes>()
             Log.d("",notes.toString())
-            displayNotes(notes)
+            requireActivity().runOnUiThread {
+                displayNotes(notes)
+            }
         }
     }
 
