@@ -5,18 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.lifecycle.lifecycleScope
-import com.valance.medicine.Medicine
-import com.valance.medicine.R
-import com.valance.medicine.databinding.ActivityMainBinding
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.postgrest.Postgrest
-import io.github.jan.supabase.postgrest.PropertyConversionMethod
-import kotlinx.coroutines.launch
 
+import com.valance.medicine.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
-    private lateinit var supabaseClient: SupabaseClient
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +19,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.my_nav_host_fragment, MainFragment())
             .commit()
         val myApplication = application as Medicine
-        supabaseClient = myApplication.supabaseClient
-
     }
 
     private fun hideSystemUI() {
