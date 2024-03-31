@@ -1,4 +1,4 @@
-package com.valance.medicine
+package com.valance.medicine.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

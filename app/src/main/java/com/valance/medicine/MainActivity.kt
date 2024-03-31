@@ -7,6 +7,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 
 import com.valance.medicine.databinding.ActivityMainBinding
+import com.valance.medicine.fragment.MainFragment
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
