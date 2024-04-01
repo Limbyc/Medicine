@@ -1,4 +1,7 @@
 package com.valance.medicine.fragment
 
-class ProfileFragment {
+import androidx.fragment.app.Fragment
+
+class ProfileFragment: Fragment() {
 }
+

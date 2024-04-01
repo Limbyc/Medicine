@@ -1,4 +1,6 @@
 package com.valance.medicine.fragment
 
-class RegistrationFragment {
+import androidx.fragment.app.Fragment
+
+class RegistrationFragment : Fragment() {
 }
