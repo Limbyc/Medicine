@@ -1,4 +1,6 @@
 package com.valance.medicine.fragment
 
-class SearchFragment {
+import androidx.fragment.app.Fragment
+
+class SearchFragment : Fragment() {
 }
