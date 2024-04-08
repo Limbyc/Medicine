@@ -9,5 +9,14 @@
         android:id="@+id/startFragment"
         android:name="com.valance.medicine.fragment.StartFragment"
         android:label="StartFragment"
-        tools:layout="@layout/start_fragment"/>
+        tools:layout="@layout/start_fragment">
+        <action
+            android:id="@+id/action_startFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.valance.medicine.fragment.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/registration_fragment"/>
 </navigation>
