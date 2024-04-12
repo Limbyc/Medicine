@@ -43,7 +43,11 @@ class StartFragment: Fragment() {
 
         binding.LottieView.setAnimation("start_animation.json")
         binding.LottieView.repeatCount = 0
-        binding.LottieView.playAnimation()
+        binding.LottieView.playAnimation();
+
+        binding.Skip.setOnClickListener {
+            navigateToOtherFragment()
+        }
     }
 
     private fun navigateToOtherFragment() {

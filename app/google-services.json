@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "379302079903",
+    "project_id": "medicine-b065c",
+    "storage_bucket": "medicine-b065c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379302079903:android:99f6144a72046788c3a1aa",
+        "android_client_info": {
+          "package_name": "com.valance.medicine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlvVendQu2P4_L9DT7Kglm-4XSCqtQt8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

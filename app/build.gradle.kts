@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.30"
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 
 }
 
@@ -41,12 +43,16 @@ android {
 }
 
 dependencies {
+    
+    //firebase
+    implementation("com.google.firebase:firebase-crashlytics:18.6.4")
 
     //Nav
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+
     //fragment
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 

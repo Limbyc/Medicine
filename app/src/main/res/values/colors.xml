@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    //registration
+    <color name="registration_button_ready">#0560FA</color>
+    <color name="registration_button_not_ready">#A7A7A7</color>
 </resources>

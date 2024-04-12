@@ -18,5 +18,23 @@
         android:id="@+id/registrationFragment"
         android:name="com.valance.medicine.fragment.RegistrationFragment"
         android:label="RegistrationFragment"
-        tools:layout="@layout/registration_fragment"/>
+        tools:layout="@layout/registration_fragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.valance.medicine.fragment.AuthFragment"
+        android:label="AuthFragment"
+        tools:layout="@layout/auth_fragment">
+        <action
+            android:id="@+id/action_authFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.valance.medicine.fragment.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/main_fragment"/>
 </navigation>
