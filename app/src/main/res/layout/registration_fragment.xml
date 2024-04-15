@@ -56,28 +56,47 @@
         app:layout_constraintTop_toBottomOf="@+id/phone"
         tools:layout_editor_absoluteX="20dp" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/registration_rectangle"
-        android:hint="Пароль"
-        android:layout_marginTop="8dp"
-        android:padding="12dp"
-        android:drawableEnd="@drawable/eye"
-        android:textColorHint="#A7A7A7"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/registration_rectangle"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColorHint="#A7A7A7"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/watchPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/password"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/eye"
+            app:layout_constraintEnd_toEndOf="@+id/password" />
+
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Подтверждение пароля"
+        android:layout_marginTop="8dp"
         android:textColor="#A7A7A7"
         android:textSize="14sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
         tools:layout_editor_absoluteX="20dp" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -86,6 +105,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/registration_rectangle"
         android:hint="Пароль"
+        android:inputType="textPassword"
         android:padding="12dp"
         android:drawableEnd="@drawable/eye"
         android:layout_marginTop="8dp"

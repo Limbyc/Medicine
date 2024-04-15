@@ -43,9 +43,9 @@ android {
 }
 
 dependencies {
-    
     //firebase
     implementation("com.google.firebase:firebase-crashlytics:18.6.4")
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.11.1")
 
     //Nav
     val nav_version = "2.7.7"

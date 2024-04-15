@@ -26,6 +26,8 @@ class AuthFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.registration.setOnClickListener {
             findNavController().navigate(R.id.registrationFragment)
+
+
         }
     }
 }
