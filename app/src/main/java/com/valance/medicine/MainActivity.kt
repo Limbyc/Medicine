@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.fragment.NavHostFragment
 
 import com.valance.medicine.databinding.ActivityMainBinding
-import com.valance.medicine.fragment.MainFragment
+import com.valance.medicine.ui.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

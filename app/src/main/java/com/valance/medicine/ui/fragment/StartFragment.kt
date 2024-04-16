@@ -1,4 +1,4 @@
-package com.valance.medicine.fragment
+package com.valance.medicine.ui.fragment
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

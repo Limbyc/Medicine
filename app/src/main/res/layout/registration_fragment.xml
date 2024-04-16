@@ -84,6 +84,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="10dp"
             android:src="@drawable/eye"
+            android:clickable="true"
             app:layout_constraintEnd_toEndOf="@+id/password" />
 
     </RelativeLayout>
@@ -99,19 +100,38 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
         tools:layout_editor_absoluteX="20dp" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/confirmPassword"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/registration_rectangle"
-        android:hint="Пароль"
-        android:inputType="textPassword"
-        android:padding="12dp"
-        android:drawableEnd="@drawable/eye"
         android:layout_marginTop="8dp"
-        android:textColorHint="#A7A7A7"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/registration_rectangle"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColorHint="#A7A7A7"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/watchPasswordConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:src="@drawable/eye" />
+
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/Registration"
@@ -128,22 +148,35 @@
         android:gravity="center"
         android:layout_marginBottom="30dp"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userAuth"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Пользователь уже существует"
+        android:textColor="@color/auth"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPassword">
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/DoYouHaveAnAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
             android:text="У вас уже есть аккаунт?"
             android:textColor="#A7A7A7"
-            android:layout_marginStart="85dp"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -156,5 +189,7 @@
             android:textColor="#0560FA" />
 
     </RelativeLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

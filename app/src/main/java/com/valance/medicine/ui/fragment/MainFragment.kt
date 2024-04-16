@@ -1,4 +1,4 @@
-package com.valance.medicine.fragment
+package com.valance.medicine.ui.fragment
 
 import android.os.Bundle
 import android.util.Log

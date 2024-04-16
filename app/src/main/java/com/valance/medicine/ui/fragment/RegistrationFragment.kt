@@ -1,13 +1,11 @@
-package com.valance.medicine.fragment
+package com.valance.medicine.ui.fragment
 
-import android.content.ContentValues.TAG
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -17,22 +15,33 @@ import androidx.navigation.fragment.findNavController
 import com.valance.medicine.R
 import com.valance.medicine.databinding.RegistrationFragmentBinding
 import androidx.core.content.ContextCompat
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.navigation.NavController
+import com.valance.medicine.ui.model.UserModel
+import com.valance.medicine.ui.presenter.RegistrationPresenter
 
 class RegistrationFragment : Fragment() {
 
     private lateinit var binding: RegistrationFragmentBinding
     private var registrationFlag = 0
+    private lateinit var presenter: RegistrationPresenter
+    private lateinit var navController: NavController
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        navController = findNavController()
+
+        val userModel = UserModel()
+        presenter = RegistrationPresenter(userModel, navController, this)
+
         binding = RegistrationFragmentBinding.inflate(inflater,container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.Vhod.setOnClickListener {
             findNavController().navigate(R.id.authFragment)
@@ -70,17 +79,22 @@ class RegistrationFragment : Fragment() {
         })
 
         watchPassword()
+
+        binding.Registration.setOnClickListener {
+            val phone = binding.phone.text.toString()
+            val password = binding.password.text.toString()
+            presenter.registerUser(phone, password)
+        }
+
     }
 
     private fun checkPasswordsMatch() {
         val password = binding.password.text.toString()
         val confirmPassword = binding.confirmPassword.text.toString()
 
-        if (password == confirmPassword) {
-            registrationFlag = 1
-        } else {
-            registrationFlag = 0
-        }
+        if (password == confirmPassword) registrationFlag = 1
+        else registrationFlag = 0
+
     }
     private fun formatPhoneNumber(text: Editable?) {
         text?.let {
@@ -101,28 +115,6 @@ class RegistrationFragment : Fragment() {
             binding.Registration.backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(binding.Registration.context, R.color.registration_button_ready)
             )
-            binding.Registration.setOnClickListener {
-                val phone = binding.phone.text.toString()
-                val password = binding.password.text.toString()
-
-                val user = hashMapOf(
-                    "phone" to phone,
-                    "password" to password
-                )
-                val db = FirebaseFirestore.getInstance()
-                val collectionRef = db.collection("Users")
-                val documentRef = collectionRef.document("user")
-
-                documentRef
-                    .set(user)
-                    .addOnSuccessListener {
-                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentRef.id}")
-                        findNavController().navigate(R.id.mainFragment)
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w(TAG, "Error adding document", e)
-                    }
-            }
         } else {
             binding.Registration.backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(binding.Registration.context, R.color.registration_button_not_ready)
@@ -131,8 +123,30 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+    fun showUserExistsMessage(){
+        binding.userAuth.visibility = View.VISIBLE
+    }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun watchPassword() {
+        binding.watchPasswordConfirm.setOnTouchListener { view, motionEvent ->
+            val cursorPosition = binding.confirmPassword.selectionEnd
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    binding.confirmPassword.transformationMethod = null
+                }
+                MotionEvent.ACTION_UP -> {
+                    binding.confirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                    view.performClick()
+                }
+                MotionEvent.ACTION_CANCEL -> {
+                    binding.confirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                }
+            }
+
+            binding.confirmPassword.setSelection(cursorPosition)
+            true
+        }
         binding.watchPassword.setOnTouchListener { view, motionEvent ->
             val cursorPosition = binding.password.selectionEnd
             when (motionEvent.action) {
@@ -147,10 +161,9 @@ class RegistrationFragment : Fragment() {
                     binding.password.transformationMethod = PasswordTransformationMethod.getInstance()
                 }
             }
+
             binding.password.setSelection(cursorPosition)
             true
         }
     }
-
-
 }
