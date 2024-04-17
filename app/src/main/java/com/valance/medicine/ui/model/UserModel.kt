@@ -30,4 +30,15 @@ class UserModel {
                 callback(false)
             }
     }
+
+    fun checkUserCredentials(phone: String, password: String, callback: (Boolean) -> Unit) {
+        collectionRef.whereEqualTo("phone", phone).whereEqualTo("password", password).get()
+            .addOnSuccessListener { documents ->
+                callback(documents.size() > 0)
+            }
+            .addOnFailureListener { exception ->
+                callback(false)
+            }
+    }
+
 }
