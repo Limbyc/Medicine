@@ -4,7 +4,6 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.30"
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-
 }
 
 android {
@@ -52,6 +51,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    //bottom_navigation_graph
+    implementation ("com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4")
 
     //fragment
     implementation("androidx.fragment:fragment-ktx:1.6.2")

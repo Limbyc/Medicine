@@ -1,8 +1,18 @@
 package com.valance.medicine
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -13,9 +23,9 @@ import com.valance.medicine.ui.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         hideSystemUI()
@@ -25,18 +35,41 @@ class MainActivity : AppCompatActivity() {
 
         val myApplication = application as Medicine
 
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.startFragment , R.id.chooseCours , R.id.adultCourse, R.id.registrationFragment
-//                    , R.id.taskFragment, R.id.dictionaryFragment, R.id.videoFragment-> {
-//                    binding.bottomNav.visibility = View.GONE
-//                }
-//                else -> {
-//                    binding.bottomNav.visibility = View.VISIBLE
-//                }
-//            }
-//        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.startFragment , R.id.authFragment , R.id.registrationFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    binding.bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        binding.bottomNav.setItemSelected(R.id.home)
+        binding.bottomNav.setOnItemSelectedListener {
+            when (it) {
+                R.id.home -> {
+                    if (navController.currentDestination?.id != R.id.mainFragment) {
+                        navController.navigate(R.id.mainFragment)
+                    }
+                }
+
+                R.id.order -> {
+//                    if (navController.currentDestination?.id != R.id.notificationFragment) {
+//                        navController.navigate(R.id.notificationFragment)
+//                    }
+                }
+
+                R.id.profile -> {
+                    if (navController.currentDestination?.id != R.id.profileFragment) {
+                        navController.navigate(R.id.profileFragment)
+                    }
+                }
+            }
+        }
     }
+
 
     private fun hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)

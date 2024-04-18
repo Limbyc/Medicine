@@ -16,4 +16,16 @@
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_nav"
+        style="@style/Widget.ChipNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bubble"
+        android:elevation="16dp"
+        app:cnb_menuResource="@menu/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="@+id/my_nav_host_fragment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

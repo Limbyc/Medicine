@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_home_24"
+        app:cnb_iconColor="@color/order"
+        app:cnb_backgroundColor= "@color/white"
+        android:title="Главная" />
+    <item
+        android:title="Запись"
+        android:id="@+id/order"
+        android:icon="@drawable/order_rbbvy9wmcfay"
+        app:cnb_iconColor="@color/order"
+        app:cnb_backgroundColor= "@color/white"/>
+    <item
+        android:title="Профиль"
+        android:id="@+id/profile"
+        android:icon="@drawable/baseline_person_24"
+        app:cnb_iconColor="@color/order"
+        app:cnb_backgroundColor= "@color/white"/>
+</menu>

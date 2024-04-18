@@ -7,4 +7,10 @@
     <color name="registration_button_ready">#0560FA</color>
     <color name="registration_button_not_ready">#A7A7A7</color>
     <color name="auth">#9C2020</color>
+
+    //bottom_navigation
+    <color name="order">#5294ff</color>
+
+    //profile_fragment
+    <color name="line">#CAC6C6</color>
 </resources>

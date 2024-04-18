@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.Medicine" parent="Base.Theme.Medicine" />
+    <style name="Widget.ChipNavigationBar" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemHorizontalTranslationEnabled">false</item>
+    </style>
 </resources>

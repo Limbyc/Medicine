@@ -36,5 +36,14 @@
         android:id="@+id/mainFragment"
         android:name="com.valance.medicine.ui.fragment.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/main_fragment"/>
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.valance.medicine.ui.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment"/>
 </navigation>
