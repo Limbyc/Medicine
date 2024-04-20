@@ -1,6 +1,7 @@
 package com.valance.medicine.ui.model
 
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
 class UserModel {
     private val db = FirebaseFirestore.getInstance()
@@ -21,9 +22,12 @@ class UserModel {
             "phone" to phone,
             "password" to password
         )
-        collectionRef.document("user")
-            .set(user)
-            .addOnSuccessListener {
+
+        val numericUserId = generateNumericUserId().toString()
+        user["user_id"] = numericUserId
+
+        collectionRef.add(user)
+            .addOnSuccessListener { documentReference ->
                 callback(true)
             }
             .addOnFailureListener { e ->
@@ -40,5 +44,24 @@ class UserModel {
                 callback(false)
             }
     }
+
+
+//    suspend fun getUserData(phone: String): String? {
+//        val documents = collectionRef.whereEqualTo("phone", phone).get().await()
+//        if (documents.isNotEmpty()) {
+//            val document = documents[0]
+//            val userId = document.getString("user_id") ?: ""
+//            if (userId.all { it.isDigit() }) {
+//                return userId
+//            }
+//        }
+//        return null
+//    }
+
+    private fun generateNumericUserId(): Long {
+        val currentTime = System.currentTimeMillis()
+        return (currentTime % 1000000)
+    }
+
 
 }

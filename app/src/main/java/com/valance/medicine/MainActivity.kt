@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.order -> {
-//                    if (navController.currentDestination?.id != R.id.notificationFragment) {
-//                        navController.navigate(R.id.notificationFragment)
-//                    }
+                    if (navController.currentDestination?.id != R.id.orderFragment) {
+                        navController.navigate(R.id.orderFragment)
+                    }
                 }
 
                 R.id.profile -> {
