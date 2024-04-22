@@ -5,6 +5,9 @@ import androidx.navigation.NavController
 import com.valance.medicine.R
 import com.valance.medicine.ui.fragment.AuthFragment
 import com.valance.medicine.ui.model.UserModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AuthPresenter(private val userModel: UserModel, private val navController: NavController, private val fragment: AuthFragment) {
 
@@ -14,7 +17,8 @@ class AuthPresenter(private val userModel: UserModel, private val navController:
             return
         }
 
-        userModel.checkUserCredentials(phone, password) { isAuthenticated ->
+        GlobalScope.launch(Dispatchers.Main) {
+            val isAuthenticated = userModel.checkUserCredentials(phone, password)
             if (isAuthenticated) {
                 navController.navigate(R.id.mainFragment)
             } else {

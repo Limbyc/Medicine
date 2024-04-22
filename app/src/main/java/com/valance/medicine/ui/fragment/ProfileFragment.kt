@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import com.valance.medicine.databinding.ProfileFragmentBinding
 import com.valance.medicine.ui.ImageHelper
 import java.io.IOException
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(){
 
     private lateinit var binding: ProfileFragmentBinding
 
@@ -29,11 +30,25 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        val context = requireContext()
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+        val userId = sharedPreferences.getString("userId", null)
+        val userPhone = sharedPreferences.getString("userPhone", null)
+
+        activity?.runOnUiThread {
+            binding.IdUser.text = "ID: $userId"
+            binding.PhoneUser.text = "Phone: $userPhone"
+        }
         val bitmap = ImageHelper.loadImageFromPath(requireContext())
-        bitmap?.let { binding.UserPhoto.setImageBitmap(it) }
+        bitmap.let { binding.UserPhoto.setImageBitmap(it) }
 
         binding.cardView.setOnClickListener {
             pickPhoto()
@@ -52,6 +67,7 @@ class ProfileFragment : Fragment() {
             startActivityForResult(galeriIntent, 2)
         }
     }
+
     @Deprecated("Use pickPhotoWithPermissionCheck() instead.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

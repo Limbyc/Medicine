@@ -1,6 +1,7 @@
 package com.valance.medicine.ui.fragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
@@ -18,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.valance.medicine.ui.model.UserModel
 import com.valance.medicine.ui.presenter.RegistrationPresenter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RegistrationFragment : Fragment() {
 
@@ -34,7 +37,7 @@ class RegistrationFragment : Fragment() {
         navController = findNavController()
 
         val userModel = UserModel()
-        presenter = RegistrationPresenter(userModel, navController, this)
+        presenter = RegistrationPresenter(userModel, navController, requireContext())
 
         binding = RegistrationFragmentBinding.inflate(inflater,container, false)
         return binding.root
@@ -83,7 +86,9 @@ class RegistrationFragment : Fragment() {
         binding.Registration.setOnClickListener {
             val phone = binding.phone.text.toString()
             val password = binding.password.text.toString()
-            presenter.registerUser(phone, password)
+            GlobalScope.launch {
+                presenter.registerUser(phone, password)
+            }
         }
 
     }

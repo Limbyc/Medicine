@@ -1,5 +1,6 @@
 package com.valance.medicine.ui.model
 
+import android.service.autofill.UserData
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -7,17 +8,14 @@ class UserModel {
     private val db = FirebaseFirestore.getInstance()
     private val collectionRef = db.collection("Users")
 
-    fun checkIfUserExists(phone: String, callback: (Boolean) -> Unit) {
-        collectionRef.whereEqualTo("phone", phone).get()
-            .addOnSuccessListener { documents ->
-                callback(documents.size() > 0)
-            }
-            .addOnFailureListener { exception ->
-                callback(false)
-            }
+    suspend fun checkIfUserExists(phone: String): Boolean {
+        val documents = collectionRef.whereEqualTo("phone", phone).get().await()
+        return documents.size() > 0
     }
 
-    fun saveUser(phone: String, password: String, callback: (Boolean) -> Unit) {
+    data class SaveUserResult(val userId: String?, val phone: String?, val success: Boolean,)
+
+    suspend fun saveUser(phone: String, password: String): SaveUserResult {
         val user = hashMapOf(
             "phone" to phone,
             "password" to password
@@ -26,42 +24,24 @@ class UserModel {
         val numericUserId = generateNumericUserId().toString()
         user["user_id"] = numericUserId
 
-        collectionRef.add(user)
-            .addOnSuccessListener { documentReference ->
-                callback(true)
-            }
-            .addOnFailureListener { e ->
-                callback(false)
-            }
-    }
-
-    fun checkUserCredentials(phone: String, password: String, callback: (Boolean) -> Unit) {
-        collectionRef.whereEqualTo("phone", phone).whereEqualTo("password", password).get()
-            .addOnSuccessListener { documents ->
-                callback(documents.size() > 0)
-            }
-            .addOnFailureListener { exception ->
-                callback(false)
-            }
+        return try {
+            collectionRef.add(user).await()
+            SaveUserResult( numericUserId, phone, true)
+        } catch (e: Exception) {
+            SaveUserResult( null, null, false)
+        }
     }
 
 
-//    suspend fun getUserData(phone: String): String? {
-//        val documents = collectionRef.whereEqualTo("phone", phone).get().await()
-//        if (documents.isNotEmpty()) {
-//            val document = documents[0]
-//            val userId = document.getString("user_id") ?: ""
-//            if (userId.all { it.isDigit() }) {
-//                return userId
-//            }
-//        }
-//        return null
-//    }
+
+    suspend fun checkUserCredentials(phone: String, password: String): Boolean {
+        val documents = collectionRef.whereEqualTo("phone", phone).whereEqualTo("password", password).get().await()
+        return documents.size() > 0
+    }
 
     private fun generateNumericUserId(): Long {
         val currentTime = System.currentTimeMillis()
         return (currentTime % 1000000)
     }
-
-
 }
+

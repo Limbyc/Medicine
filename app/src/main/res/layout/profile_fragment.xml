@@ -36,7 +36,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2">
 
@@ -72,7 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:text="Добавить инофрмацию"
+        android:text="Изменить информацию"
+        android:textColor="@color/order"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/PhoneUser" />
 
@@ -82,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Текущие записи:"
-        android:textStyle="bold"
+        android:textStyle="italic"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +114,8 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="У вас нету записей"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:textColor="@color/line"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
@@ -125,7 +127,7 @@
         android:layout_marginEnd="20dp"
         android:text="История посещений:"
         android:layout_marginTop="8dp"
-        android:textStyle="bold"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline1" />
@@ -152,9 +154,10 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:gravity="center"
+        android:textColor="@color/line"
         android:layout_marginTop="8dp"
         android:text="У вас нету посещений"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
