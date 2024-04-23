@@ -1,6 +1,5 @@
 package com.valance.medicine.ui.model
 
-import android.service.autofill.UserData
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 

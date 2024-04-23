@@ -13,4 +13,7 @@
 
     //profile_fragment
     <color name="line">#CAC6C6</color>
+
+    //order_fragment
+    <color name="TabLayout">#F1F1F1</color>
 </resources>
