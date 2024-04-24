@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:text="Изменить информацию"
+        android:text="Дополнить данные"
         android:textColor="@color/order"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/PhoneUser" />
