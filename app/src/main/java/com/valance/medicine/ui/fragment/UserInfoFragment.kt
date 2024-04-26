@@ -30,5 +30,6 @@ class UserInfoFragment: Fragment() {
             findNavController().navigate(R.id.profileFragment)
         }
 
+
     }
 }
