@@ -36,7 +36,7 @@ class AuthFragment: Fragment() {
         binding = AuthFragmentBinding.inflate(inflater,container, false)
 
         navController = findNavController()
-        val userModel = UserModel()
+        val userModel = UserModel(requireContext())
         authPresenter = AuthPresenter(userModel, navController, this)
 
         return binding.root

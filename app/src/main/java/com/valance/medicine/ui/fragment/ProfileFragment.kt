@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,16 +33,11 @@ class ProfileFragment : Fragment(){
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val context = requireContext()
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
         val userId = sharedPreferences.getString("userId", null)
         val userPhone = sharedPreferences.getString("userPhone", null)
 
@@ -49,8 +45,13 @@ class ProfileFragment : Fragment(){
             binding.IdUser.text = "ID: $userId"
             binding.PhoneUser.text = "Phone: $userPhone"
         }
+
+        if (userPhone !== null) {
+            savePhoneToSharedPreferences(userPhone)
+        }
+
         val bitmap = ImageHelper.loadImageFromPath(requireContext())
-        bitmap.let { binding.UserPhoto.setImageBitmap(it) }
+        bitmap?.let { binding.UserPhoto.setImageBitmap(it) }
 
         binding.cardView.setOnClickListener {
             pickPhoto()
@@ -60,6 +61,7 @@ class ProfileFragment : Fragment(){
             findNavController().navigate(R.id.userInfoFragment)
         }
     }
+
     private fun pickPhoto() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -68,9 +70,9 @@ class ProfileFragment : Fragment(){
         ) {
             requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
         } else {
-            val galeriIntent =
+            val galleryIntent =
                 Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galeriIntent, 2)
+            startActivityForResult(galleryIntent, 2)
         }
     }
 
@@ -92,6 +94,14 @@ class ProfileFragment : Fragment(){
                 }
             }
         }
+    }
+
+    private fun savePhoneToSharedPreferences(phone: String) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val editor = sharedPreferences.edit()
+        editor.putString("userPhone", phone)
+        editor.apply()
+        Log.d("ProfileFragment", "Saved phone number: $phone")
     }
 
 }

@@ -36,7 +36,7 @@ class RegistrationFragment : Fragment() {
     ): View {
         navController = findNavController()
 
-        val userModel = UserModel()
+        val userModel = UserModel(requireContext())
         presenter = RegistrationPresenter(userModel, navController, requireContext())
 
         binding = RegistrationFragmentBinding.inflate(inflater,container, false)
