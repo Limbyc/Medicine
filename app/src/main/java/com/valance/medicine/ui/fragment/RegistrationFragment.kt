@@ -19,10 +19,11 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.valance.medicine.ui.model.UserModel
 import com.valance.medicine.ui.presenter.RegistrationPresenter
+import com.valance.medicine.ui.view.UserAuthView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(), UserAuthView {
 
     private lateinit var binding: RegistrationFragmentBinding
     private var registrationFlag = 0
@@ -37,7 +38,7 @@ class RegistrationFragment : Fragment() {
         navController = findNavController()
 
         val userModel = UserModel(requireContext())
-        presenter = RegistrationPresenter(userModel, navController, requireContext())
+        presenter = RegistrationPresenter(userModel, navController, requireContext(), this)
 
         binding = RegistrationFragmentBinding.inflate(inflater,container, false)
         return binding.root
@@ -169,6 +170,12 @@ class RegistrationFragment : Fragment() {
 
             binding.password.setSelection(cursorPosition)
             true
+        }
+    }
+
+    override fun showUserAuth() {
+        activity?.runOnUiThread {
+            binding.userAuth.visibility = View.VISIBLE
         }
     }
 }

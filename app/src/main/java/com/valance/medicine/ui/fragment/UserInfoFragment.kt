@@ -140,14 +140,14 @@ class UserInfoFragment: Fragment(), UserInfoView {
             addInfoFlag = 1
 
             binding.addInfo.setOnClickListener {
-
-
                 GlobalScope.launch {
                     val userPhone = sharedPreferences.getString("userPhone", null)
                     userPhone?.let { phone ->
                         presenter.addUserInfo(phone, name, lastName, birthday)
                     }
                 }
+                findNavController().navigate(R.id.profileFragment)
+
             }
 
         } else {

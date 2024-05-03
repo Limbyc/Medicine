@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
 
 class UserModel(private val context: Context) {
@@ -40,19 +41,28 @@ class UserModel(private val context: Context) {
     }
 
     suspend fun addUserInfo(userPhone: String, name: String, lastName: String, birthday: String): UserModel.SaveUserResult {
-        val updatedUserData = hashMapOf(
+        val updatedUserData: Map<String, Any> = hashMapOf(
             "name" to name,
             "lastName" to lastName,
             "birthday" to birthday
         )
 
         return try {
-            collectionRef.document(userPhone).set(updatedUserData).await()
-            SaveUserResult(userPhone, userPhone, true)
+            val querySnapshot = collectionRef.whereEqualTo("phone", userPhone).get().await()
+
+            if (!querySnapshot.isEmpty) {
+                val documentSnapshot = querySnapshot.documents[0]
+                collectionRef.document(documentSnapshot.id).update(updatedUserData).await()
+                SaveUserResult(documentSnapshot.id, userPhone, true)
+            } else {
+                SaveUserResult(null, null, false)
+            }
         } catch (e: Exception) {
             SaveUserResult(null, null, false)
         }
     }
+
+
 
     private fun generateNumericUserId(): Long {
         val currentTime = System.currentTimeMillis()
