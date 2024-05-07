@@ -177,5 +177,6 @@ class RegistrationFragment : Fragment(), UserAuthView {
         activity?.runOnUiThread {
             binding.userAuth.visibility = View.VISIBLE
         }
+
     }
 }
